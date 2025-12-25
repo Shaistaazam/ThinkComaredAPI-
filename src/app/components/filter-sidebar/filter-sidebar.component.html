@@ -1,26 +1,102 @@
 <div class="bg-white rounded-lg shadow-sm border p-4">
-  <!-- Filters -->
-  <h3 class="font-semibold text-gray-800 mb-4">Filters</h3>
-  
-  <!-- Filter List -->
-  <div class="space-y-3">
-    <div
-      *ngFor="let filter of filters"
-      class="cursor-pointer"
-    >
-      <div 
-        class="flex justify-between items-center"
-      >
-        <span class="font-medium text-gray-700">{{ filter }}</span>
-        <span class="text-gray-500" style="margin-left: 2rem;">▶</span>
+  <!-- Price Range Filter -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-3 cursor-pointer" (click)="toggleSection('priceRange')">
+      <h3 class="font-semibold text-[#1E293B]">Price Range</h3>
+      <span class="text-gray-500 transform transition-transform" [class.rotate-90]="expandedSections['priceRange']">▶</span>
+    </div>
+    
+    <div *ngIf="expandedSections['priceRange']" class="space-y-4">
+      <div class="flex items-center space-x-4">
+        <div class="flex-1">
+          <label class="block text-sm text-gray-600 mb-1">Min</label>
+          <input 
+            type="number" 
+            [(ngModel)]="priceRange.min" 
+            (ngModelChange)="onPriceRangeChange()"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
+        </div>
+        <div class="flex-1">
+          <label class="block text-sm text-gray-600 mb-1">Max</label>
+          <input 
+            type="number" 
+            [(ngModel)]="priceRange.max" 
+            (ngModelChange)="onPriceRangeChange()"
+            class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#4F46E5] focus:border-transparent">
+        </div>
+      </div>
+      <div class="text-sm text-gray-600">
+        ${{ priceRange.min }} - ${{ priceRange.max }}
       </div>
     </div>
   </div>
 
-  <!-- Button section with some spacing below the filters -->
-  <div class="mt-6 space-y-3">
+  <!-- Colors Filter -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-3 cursor-pointer" (click)="toggleSection('colors')">
+      <h3 class="font-semibold text-[#1E293B]">Colors</h3>
+      <span class="text-gray-500 transform transition-transform" [class.rotate-90]="expandedSections['colors']">▶</span>
+    </div>
+    
+    <div *ngIf="expandedSections['colors']" class="grid grid-cols-3 gap-2">
+      <div *ngFor="let color of colors" class="flex items-center">
+        <input 
+          type="checkbox" 
+          [checked]="color.selected"
+          (change)="onColorChange(color)"
+          class="w-4 h-4 text-[#4F46E5] border-gray-300 rounded focus:ring-[#4F46E5]">
+        <label class="ml-2 text-sm text-gray-700 cursor-pointer">{{ color.name }}</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Filter -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-3 cursor-pointer" (click)="toggleSection('reviews')">
+      <h3 class="font-semibold text-[#1E293B]">Customer Reviews</h3>
+      <span class="text-gray-500 transform transition-transform" [class.rotate-90]="expandedSections['reviews']">▶</span>
+    </div>
+    
+    <div *ngIf="expandedSections['reviews']" class="space-y-2">
+      <div *ngFor="let review of reviews" class="flex items-center justify-between cursor-pointer hover:bg-gray-50 p-2 rounded" (click)="onReviewChange(review)">
+        <div class="flex items-center">
+          <input 
+            type="radio" 
+            name="rating"
+            [checked]="review.selected"
+            class="w-4 h-4 text-[#4F46E5] border-gray-300 focus:ring-[#4F46E5]">
+          <div class="ml-2 flex items-center">
+            <div class="flex">
+              <svg *ngFor="let star of getStarArray(review.stars)" class="w-4 h-4 text-yellow-400 fill-current" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            </div>
+            <span class="ml-1 text-sm text-gray-600">& Up</span>
+          </div>
+        </div>
+        <span class="text-sm text-gray-500">{{ review.percentage }}%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specifications Filter -->
+  <div class="mb-6">
+    <div class="flex justify-between items-center mb-3 cursor-pointer" (click)="toggleSection('specifications')">
+      <h3 class="font-semibold text-[#1E293B]">Specifications</h3>
+      <span class="text-gray-500 transform transition-transform" [class.rotate-90]="expandedSections['specifications']">▶</span>
+    </div>
+    
+    <div *ngIf="expandedSections['specifications']" class="space-y-2">
+      <div *ngFor="let spec of specifications" class="text-sm text-gray-700 hover:text-[#4F46E5] cursor-pointer p-2 hover:bg-gray-50 rounded">
+        {{ spec }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="space-y-3">
     <button 
-      class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
+      class="w-full bg-[#4F46E5] hover:bg-[#7C3AED] text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300"
       (click)="onApplyFilters()">
       Apply Filters
     </button>
@@ -33,7 +109,7 @@
     
     <button 
       (click)="goToCompare()"
-      class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300">
+      class="w-full bg-[#7C3AED] hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-300">
       Compare Products
     </button>
   </div>

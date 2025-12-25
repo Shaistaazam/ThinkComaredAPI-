@@ -3,14 +3,14 @@
   <div class="bg-white shadow-sm border-b">
     <div class="container mx-auto px-4 py-6">
       <div class="text-center mb-6">
-        <h1 class="text-3xl font-bold text-gray-800 mb-2">Product Comparison</h1>
+        <h1 class="text-3xl font-bold text-[#1E293B] mb-2">Product Comparison</h1>
         <p class="text-gray-600">Select up to 4 products to compare their features and prices</p>
       </div>
 
       <!-- Comparison Slots -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <!-- Filled Slots -->
-        <div *ngFor="let product of comparisonItems" class="bg-white border-2 border-[#FEB854] rounded-lg p-4 relative min-h-[140px] flex flex-col">
+        <div *ngFor="let product of comparisonItems" class="bg-white border-2 border-[#7C3AED] rounded-lg p-4 relative min-h-[140px] flex flex-col">
           <button 
             (click)="removeFromComparison(product.id)"
             class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600 transition-colors z-10">
@@ -19,12 +19,12 @@
           <div class="text-center flex-1 flex flex-col justify-center">
             <img [src]="product.imageUrl" [alt]="product.name" class="w-16 h-16 mx-auto mb-2 object-contain">
             <h3 class="text-sm font-medium text-gray-800 line-clamp-2 mb-1">{{ product.name }}</h3>
-            <p class="text-[#FEB854] font-bold text-sm">${{ product.price }}</p>
+            <p class="text-[#DC2626] font-bold text-sm">${{ product.price }}</p>
           </div>
         </div>
 
         <!-- Empty Slots -->
-        <div *ngFor="let slot of getEmptySlots()" class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-4 flex items-center justify-center min-h-[140px] hover:border-[#FEB854] hover:bg-orange-50 transition-colors">
+        <div *ngFor="let slot of getEmptySlots()" class="bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-4 flex items-center justify-center min-h-[140px] hover:border-[#7C3AED] hover:bg-purple-50 transition-colors">
           <div class="text-center text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -47,7 +47,7 @@
           (click)="proceedToComparison()"
           [disabled]="!canProceed()"
           [class]="canProceed() ? 
-            'bg-[#FEB854] hover:bg-orange-600 text-white' : 
+            'bg-[#4F46E5] hover:bg-indigo-700 text-white' : 
             'bg-gray-300 text-gray-500 cursor-not-allowed'"
           class="px-8 py-2 rounded-lg transition-colors font-medium">
           Compare Now ({{ comparisonItems.length }})
@@ -67,11 +67,11 @@
 
   <!-- Available Products Section -->
   <div class="container mx-auto px-4 py-8">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">Available Products</h2>
+    <h2 class="text-2xl font-bold text-[#1E293B] mb-6">Available Products</h2>
     
     <!-- Loading State -->
     <div *ngIf="isLoading" class="flex justify-center items-center py-12">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FEB854]"></div>
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4F46E5]"></div>
       <span class="ml-3 text-gray-600">Loading products...</span>
     </div>
 

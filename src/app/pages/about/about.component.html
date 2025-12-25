@@ -1,69 +1,181 @@
-<div class="min-h-screen">
-  <app-category-hero></app-category-hero>
+<div class="min-h-screen bg-[#F8FAFC]">
+  <!-- Hero Section -->
+  <div class="relative bg-gradient-to-br from-[#4F46E5] via-[#7C3AED] to-[#4F46E5] text-white overflow-hidden">
+    <div class="absolute inset-0 bg-black opacity-10"></div>
+    <div class="relative container mx-auto px-4 py-20 lg:py-32">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-5xl lg:text-7xl font-bold mb-6 leading-tight">
+          About <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-200">ThinkCompared</span>
+        </h1>
+        <p class="text-xl lg:text-2xl text-purple-100 mb-8 leading-relaxed">
+          Revolutionizing the way you shop by making product comparison simple, smart, and transparent
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button class="bg-white text-[#4F46E5] px-8 py-4 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300 shadow-lg">
+            Our Mission
+          </button>
+          <button class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#4F46E5] transition-all duration-300">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Floating Elements -->
+    <div class="absolute top-20 left-10 w-20 h-20 bg-white opacity-10 rounded-full animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 bg-purple-300 opacity-20 rounded-full animate-bounce"></div>
+    <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-indigo-300 opacity-15 rounded-full animate-ping"></div>
+  </div>
 
-  <div class="container mx-auto px-4 sm:mt-14">
-    <div class="flex items-center text-gray-400 font-poppins font-semibold text-xl">
-      <a href="/" class="hover:text-[#FEB854] transition-colors duration-300 pr-2">Home</a>
-      <span class="text-black mx-2">›</span>
-      <span class="text-black pl-2">About Us</span>
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 py-6">
+    <div class="flex items-center text-gray-500 font-medium text-sm">
+      <a href="/" class="hover:text-[#7C3AED] transition-colors duration-300">Home</a>
+      <span class="text-[#1E293B] mx-2">›</span>
+      <span class="text-[#1E293B]">About Us</span>
     </div>
   </div>
 
   <!-- Our Story Section -->
   <div class="container mx-auto px-4 py-16">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <h2 class="text-4xl font-bold text-gray-800 mb-6">Our Story</h2>
-        <p class="text-gray-600 mb-4 leading-relaxed">
-          Think Compared was founded with a simple mission: to help shoppers make smarter purchasing
-          decisions. We understand that finding the best product at the best price can be
-          overwhelming with so many options available.
-        </p>
-        <p class="text-gray-600 mb-4 leading-relaxed">
-          That's why we created an independent product search service that aggregates millions of
-          products from over 30,000 retailers, making it easy for you to compare prices, features,
-          and reviews all in one place.
-        </p>
-        <p class="text-gray-600 leading-relaxed">
-          We're committed to transparency, accuracy, and helping you save money while enhancing your
-          shopping experience.
-        </p>
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="order-2 lg:order-1">
+        <div class="inline-block bg-[#7C3AED] text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          Our Story
+        </div>
+        <h2 class="text-4xl lg:text-5xl font-bold text-[#1E293B] mb-8 leading-tight">
+          Empowering Smart Shopping Decisions
+        </h2>
+        <div class="space-y-6 text-gray-600 text-lg leading-relaxed">
+          <p>
+            ThinkCompared was born from a simple frustration: finding the best product at the best price 
+            shouldn't be a full-time job. With countless retailers, endless options, and varying prices, 
+            shopping had become overwhelming.
+          </p>
+          <p>
+            We created an intelligent platform that aggregates millions of products from over 
+            <span class="font-semibold text-[#7C3AED]">30,000 retailers</span>, making price comparison 
+            and product research effortless and transparent.
+          </p>
+          <p>
+            Our mission is simple: <span class="font-semibold text-[#1E293B]">Save you time, money, and 
+            the hassle of endless browsing</span> while ensuring you make the most informed purchasing decisions.
+          </p>
+        </div>
+        
+        <div class="flex flex-wrap gap-4 mt-8">
+          <div class="flex items-center bg-green-50 text-green-700 px-4 py-2 rounded-full">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            Trusted by 500K+ Users
+          </div>
+          <div class="flex items-center bg-blue-50 text-blue-700 px-4 py-2 rounded-full">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            100% Free Service
+          </div>
+        </div>
       </div>
-      <div
-        class="bg-gradient-to-br from-purple-100 to-indigo-100 rounded-2xl p-8 h-96 flex items-center justify-center"
-      >
-        <div class="text-center">
-          <div class="text-6xl mb-4">🛒</div>
-          <h3 class="text-2xl font-bold text-purple-600">Smart Shopping Made Easy</h3>
+      
+      <div class="order-1 lg:order-2">
+        <div class="relative">
+          <div class="bg-gradient-to-br from-[#4F46E5] to-[#7C3AED] rounded-3xl p-12 text-white text-center shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div class="text-8xl mb-6">🛒</div>
+            <h3 class="text-3xl font-bold mb-4">Smart Shopping</h3>
+            <p class="text-purple-100 text-lg">Compare. Choose. Save.</p>
+          </div>
+          <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-[#DC2626] rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+            💰
+          </div>
+          <div class="absolute -top-6 -right-6 w-20 h-20 bg-green-500 rounded-full flex items-center justify-center text-white text-xl shadow-lg">
+            ✓
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Our Values Section -->
-  <div class="bg-gray-50 py-16">
+  <!-- Features Section -->
+  <div class="bg-white py-20">
     <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Our Values</h2>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-shadow">
-          <div class="text-5xl mb-4 text-center">💯</div>
-          <h3 class="text-xl font-bold text-purple-600 mb-3 text-center">Transparency</h3>
-          <p class="text-gray-600 text-center">
-            We provide unbiased, accurate information to help you make informed decisions.
+      <div class="text-center mb-16">
+        <div class="inline-block bg-[#7C3AED] text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          Why Choose Us
+        </div>
+        <h2 class="text-4xl lg:text-5xl font-bold text-[#1E293B] mb-6">
+          What Makes Us Different
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          We've built the most comprehensive and user-friendly product comparison platform to make your shopping experience seamless
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Feature 1 -->
+        <div class="group bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-[#4F46E5] rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+            🔍
+          </div>
+          <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Smart Search</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Advanced AI-powered search that understands what you're looking for and finds the best matches across thousands of retailers.
           </p>
         </div>
-        <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-shadow">
-          <div class="text-5xl mb-4 text-center">💰</div>
-          <h3 class="text-xl font-bold text-purple-600 mb-3 text-center">Value</h3>
-          <p class="text-gray-600 text-center">
-            Helping you save money by comparing prices from thousands of retailers.
+        
+        <!-- Feature 2 -->
+        <div class="group bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-[#7C3AED] rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+            ⚡
+          </div>
+          <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Real-Time Prices</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Live price updates from all major retailers ensure you always see the most current deals and never miss a bargain.
           </p>
         </div>
-        <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-shadow">
-          <div class="text-5xl mb-4 text-center">🚀</div>
-          <h3 class="text-xl font-bold text-purple-600 mb-3 text-center">Innovation</h3>
-          <p class="text-gray-600 text-center">
-            Constantly improving our technology to enhance your shopping experience.
+        
+        <!-- Feature 3 -->
+        <div class="group bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+            🛡️
+          </div>
+          <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Trusted Reviews</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Verified customer reviews and ratings help you make confident decisions based on real user experiences.
+          </p>
+        </div>
+        
+        <!-- Feature 4 -->
+        <div class="group bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-[#DC2626] rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+            💎
+          </div>
+          <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Premium Quality</h3>
+          <p class="text-gray-600 leading-relaxed">
+            We partner only with reputable retailers and verified sellers to ensure product authenticity and quality.
+          </p>
+        </div>
+        
+        <!-- Feature 5 -->
+        <div class="group bg-gradient-to-br from-teal-50 to-cyan-50 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-teal-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+            📱
+          </div>
+          <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Mobile First</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Fully responsive design optimized for mobile shopping, so you can compare and buy on any device, anywhere.
+          </p>
+        </div>
+        
+        <!-- Feature 6 -->
+        <div class="group bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+          <div class="w-16 h-16 bg-yellow-500 rounded-2xl flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+            🎯
+          </div>
+          <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Personalized</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Smart recommendations based on your preferences and shopping history to help you discover products you'll love.
           </p>
         </div>
       </div>
@@ -71,24 +183,151 @@
   </div>
 
   <!-- Stats Section -->
-  <div class="container mx-auto px-4 py-16">
-    <div class="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-3xl p-12">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
-        <div>
-          <h4 class="text-5xl font-bold mb-2">30K+</h4>
-          <p class="text-purple-100">Retailers</p>
+  <div class="bg-gradient-to-r from-[#4F46E5] via-[#7C3AED] to-[#4F46E5] py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+          Trusted by Millions
+        </h2>
+        <p class="text-xl text-purple-100">
+          Join the growing community of smart shoppers who save time and money with ThinkCompared
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center group">
+          <div class="bg-white bg-opacity-20 rounded-2xl p-8 backdrop-blur-sm hover:bg-opacity-30 transition-all duration-300 group-hover:scale-105">
+            <h4 class="text-5xl lg:text-6xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">30K+</h4>
+            <p class="text-purple-100 text-lg font-medium">Trusted Retailers</p>
+            <p class="text-purple-200 text-sm mt-2">Verified Partners</p>
+          </div>
         </div>
-        <div>
-          <h4 class="text-5xl font-bold mb-2">1M+</h4>
-          <p class="text-purple-100">Products</p>
+        
+        <div class="text-center group">
+          <div class="bg-white bg-opacity-20 rounded-2xl p-8 backdrop-blur-sm hover:bg-opacity-30 transition-all duration-300 group-hover:scale-105">
+            <h4 class="text-5xl lg:text-6xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">5M+</h4>
+            <p class="text-purple-100 text-lg font-medium">Products Listed</p>
+            <p class="text-purple-200 text-sm mt-2">Updated Daily</p>
+          </div>
         </div>
-        <div>
-          <h4 class="text-5xl font-bold mb-2">500K+</h4>
-          <p class="text-purple-100">Happy Users</p>
+        
+        <div class="text-center group">
+          <div class="bg-white bg-opacity-20 rounded-2xl p-8 backdrop-blur-sm hover:bg-opacity-30 transition-all duration-300 group-hover:scale-105">
+            <h4 class="text-5xl lg:text-6xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">500K+</h4>
+            <p class="text-purple-100 text-lg font-medium">Happy Users</p>
+            <p class="text-purple-200 text-sm mt-2">Growing Daily</p>
+          </div>
         </div>
-        <div>
-          <h4 class="text-5xl font-bold mb-2">24/7</h4>
-          <p class="text-purple-100">Support</p>
+        
+        <div class="text-center group">
+          <div class="bg-white bg-opacity-20 rounded-2xl p-8 backdrop-blur-sm hover:bg-opacity-30 transition-all duration-300 group-hover:scale-105">
+            <h4 class="text-5xl lg:text-6xl font-bold text-white mb-2 group-hover:scale-110 transition-transform duration-300">24/7</h4>
+            <p class="text-purple-100 text-lg font-medium">Customer Support</p>
+            <p class="text-purple-200 text-sm mt-2">Always Available</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team Values Section -->
+  <div class="bg-[#F8FAFC] py-20">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <div class="inline-block bg-[#7C3AED] text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          Our Values
+        </div>
+        <h2 class="text-4xl lg:text-5xl font-bold text-[#1E293B] mb-6">
+          What Drives Us Forward
+        </h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          Our core values shape everything we do and guide us in building the best shopping experience for you
+        </p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+          <div class="text-center">
+            <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-3xl mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+              💯
+            </div>
+            <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Transparency</h3>
+            <p class="text-gray-600 leading-relaxed text-lg">
+              We believe in complete honesty. No hidden fees, no biased recommendations - just pure, 
+              unfiltered information to help you make the best decisions.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+          <div class="text-center">
+            <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-3xl mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+              💰
+            </div>
+            <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Value Creation</h3>
+            <p class="text-gray-600 leading-relaxed text-lg">
+              Every feature we build is designed to save you time and money. We measure our success 
+              by how much value we bring to your shopping experience.
+            </p>
+          </div>
+        </div>
+        
+        <div class="bg-white rounded-3xl p-10 shadow-lg hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2">
+          <div class="text-center">
+            <div class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full flex items-center justify-center text-white text-3xl mb-6 mx-auto group-hover:scale-110 transition-transform duration-300">
+              🚀
+            </div>
+            <h3 class="text-2xl font-bold text-[#1E293B] mb-4">Innovation</h3>
+            <p class="text-gray-600 leading-relaxed text-lg">
+              We're constantly pushing boundaries, exploring new technologies, and finding better ways 
+              to make shopping smarter, faster, and more enjoyable.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div class="bg-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="text-4xl lg:text-5xl font-bold text-[#1E293B] mb-6">
+          Ready to Start Smart Shopping?
+        </h2>
+        <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+          Join millions of satisfied customers who have discovered the power of intelligent product comparison. 
+          Start saving time and money today with ThinkCompared.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center">
+          <a href="/hot-deals" class="bg-[#4F46E5] hover:bg-indigo-700 text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg">
+            Explore Hot Deals
+          </a>
+          <a href="/compare" class="border-2 border-[#7C3AED] text-[#7C3AED] hover:bg-[#7C3AED] hover:text-white px-10 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105">
+            Start Comparing
+          </a>
+        </div>
+        
+        <div class="mt-12 flex flex-wrap justify-center items-center gap-8 text-gray-400">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            100% Free to Use
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            No Registration Required
+          </div>
+          <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            Instant Results
+          </div>
         </div>
       </div>
     </div>

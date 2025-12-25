@@ -4,7 +4,7 @@
     <button
       *ngIf="!isProductInComparison() && canAddMore()"
       (click)="onCompareClick()"
-      class="bg-[#FEB854] hover:bg-orange-600 text-white p-2 rounded-full shadow-lg transition-colors duration-300 group relative"
+      class="bg-[#7C3AED] hover:bg-purple-700 text-white p-2 rounded-full shadow-lg transition-colors duration-300 group relative"
       title="Add Product">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -69,11 +69,11 @@
     <!-- Bottom Section -->
     <div class="mt-4 space-y-3">
       <!-- Line 4: Price -->
-      <p class="text-lg font-bold text-[#FEB854] h-6 leading-6">${{ product.price }}</p>
+      <p class="text-lg font-bold text-[#DC2626] h-6 leading-6">${{ product.price }}</p>
       
       <!-- Line 5: Compare Price Button -->
       <button 
-        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-300 h-10">
+        class="w-full bg-[#4F46E5] hover:bg-indigo-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-300 h-10">
         Compare Price
       </button>
     </div>
