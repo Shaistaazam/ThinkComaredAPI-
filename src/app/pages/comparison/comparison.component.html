@@ -1,0 +1,94 @@
+<!-- Hero / Header Section -->
+<app-category-hero></app-category-hero>
+
+<!-- Main Content -->
+<div class="bg-white">
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center text-gray-400 font-medium text-sm">
+      <a href="/" class="hover:text-[#FEB854] transition-colors duration-300">Home</a>
+      <span class="text-black mx-2">›</span>
+      <span class="text-black">Comparison</span>
+    </div>
+  </div>
+
+  <!-- Products Section -->
+  <div class="container mx-auto px-4 pb-12">
+    <div class="flex gap-8">
+      <!-- Left Sidebar - Filters -->
+      <aside class="w-64 flex-shrink-0 hidden lg:block">
+        <app-comparison-filter-sidebar 
+                  (filtersChanged)="onFiltersChanged($event)">
+        </app-comparison-filter-sidebar>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="flex-2">
+        <!-- Results Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+          <div class="flex items-center gap-4">
+            <h1 class="text-2xl font-bold text-gray-900">SEARCH & COMPARE</h1>
+            <span class="text-sm text-gray-500" *ngIf="pagination?.totalItems">
+              OVER <span class="text-orange-500 font-semibold">{{ pagination?.totalItems }}</span> OF PRODUCTS
+            </span>
+          </div>
+          
+          <div class="flex flex-wrap items-center gap-6">
+            <!-- Category Filter Dropdown -->
+            <select 
+              [(ngModel)]="selectedCategoryId" 
+              (ngModelChange)="onCategoryChange($event)"
+              class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+              <option *ngFor="let category of categories" [value]="category.id">
+                {{ category.name }}
+              </option>
+            </select>
+            
+            <div class="text-sm text-gray-500" *ngIf="pagination?.totalItems">
+              Total items: {{ pagination?.totalItems }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div *ngIf="loading" class="flex justify-center items-center py-20">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+        </div>
+
+        <!-- Products Grid -->
+        <div *ngIf="!loading && products.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <app-hot-deals-product-card 
+            *ngFor="let product of products" 
+            [product]="product">
+          </app-hot-deals-product-card>
+        </div>
+
+        <!-- Empty State -->
+        <div *ngIf="!loading && products.length === 0" class="text-center py-20">
+          <div class="text-gray-500">
+            <svg class="mx-auto h-12 w-12 text-gray-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">No products found</h3>
+            <p class="text-gray-500">Try adjusting your search or filter criteria</p>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div *ngIf="!loading && products.length > 0 && pagination && pagination.totalItems && pagination.totalItems > 0" class="flex flex-col items-center my-8 w-full">
+          <app-pagination
+            [currentPage]="currentPage"
+            [totalPages]="getTotalPages()"
+            [totalItems]="pagination.totalItems"
+            [itemsPerPage]="selectedItemsPerPage"
+            [itemsPerPageOptions]="[12, 24, 48, 96]"
+            (pageChange)="onPageChange($event)"
+            (itemsPerPageChange)="onItemsPerPageChange($event)">
+          </app-pagination>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<app-floating-compare-button></app-floating-compare-button>

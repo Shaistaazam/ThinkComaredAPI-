@@ -1,0 +1,9 @@
+// Footer component styles
+
+footer {
+  @media (max-width: 768px) {
+    .grid {
+      gap: 2rem;
+    }
+  }
+}

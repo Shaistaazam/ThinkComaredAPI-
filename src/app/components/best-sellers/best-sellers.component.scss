@@ -1,0 +1,24 @@
+.best-sellers-section {
+  .brand-card {
+    transition: all 0.3s ease;
+    border: 1px solid #dfdfdf; /* Light gray border */
+
+    &:hover {
+      transform: translateY(-5px);
+      border: 1px solid #feb854; /* Orange border on hover */
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+      .brand-logo {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .brand-logo {
+    position: relative;
+    z-index: 1;
+    transition:
+      transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+      filter 0.3s ease;
+  }
+}

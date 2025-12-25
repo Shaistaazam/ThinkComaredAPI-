@@ -1,0 +1,40 @@
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.comparison-table {
+  min-width: 800px;
+}
+
+.feature-row:hover {
+  background-color: #f8fafc;
+}
+
+.best-value-cell {
+  position: relative;
+}
+
+.best-value-cell::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 40%, rgba(34, 197, 94, 0.1) 50%, transparent 60%);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .comparison-table {
+    font-size: 0.875rem;
+  }
+  
+  .comparison-table th,
+  .comparison-table td {
+    padding: 0.5rem;
+  }
+}

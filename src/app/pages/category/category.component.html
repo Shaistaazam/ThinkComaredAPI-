@@ -1,0 +1,149 @@
+<!-- CATEGORY PAGE -->
+
+<div class="bg-white">
+  <!-- Hero / Header Section -->
+  <app-category-hero></app-category-hero>
+
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 sm:mt-14">
+    <div class="flex items-center text-gray-400 font-poppins font-semibold text-xl">
+      <a href="/" class="hover:text-[#FEB854] transition-colors duration-300 pr-2">Home</a>
+      <span class="text-black mx-2">›</span>
+      <span class="text-black pl-2">Category</span>
+    </div>
+  </div>
+
+  <!-- ALL CATEGORIES -->
+  <div
+    class="container mx-auto px-4 py-12 sm:py-16 sm:mt-14 rounded-2xl"
+    style="background-color: #38149e08"
+  >
+    <h2
+      class="font-poppins font-bold text-3xl sm:text-[45px] leading-[63px] text-center text-[#4a4a4a] mb-4"
+    >
+      ALL CATEGORIES
+    </h2>
+    <p
+      class="text-center text-gray-600 max-w-2xl mx-auto text-base sm:text-lg mt-0 sm:mt-0 mb-6 sm:mb-8 px-4"
+    >
+      We have a large database of products.<br />
+      Just compare and place your order.
+    </p>
+
+    <!-- Link to next page -->
+    <div class="text-center mt-6">
+      <a
+        routerLink="/category-next"
+        class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-6 rounded-lg transition-colors"
+      >
+        View Next Page
+      </a>
+    </div>
+  </div>
+  <!-- Category Grid Section -->
+  <div class="category-grid-section container mx-auto px-4 sm:mt-16">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 h-full">
+      <div
+        class="category-card bg-white border-r-2 border-r-transparent shadow-sm p-6 rounded-xl transition-all duration-300 h-full flex flex-col hover:border-r-[#17A5C0] hover:shadow-lg hover:-translate-y-1"
+      >
+        <div
+          class="w-14 h-14 rounded-full bg-[#E6F5FB] flex items-center justify-center mb-8 transition-transform duration-300"
+        >
+          <img src="assets/images/Frame.png" class="h-7" alt="Laptops" title="Laptops" />
+        </div>
+        <h3 class="font-semibold text-lg mt-1 mb-3">Laptops</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
+          These are popular categories that users were most interested in recently. The products are
+          optimized to give you best value for money
+        </p>
+        <div class="flex items-center justify-between">
+          <a
+            (click)="goToProductList('laptops')"
+            class="text-[#17A5C0] text-sm font-medium hover:underline hover:text-[#128da0] transition-colors duration-300 cursor-pointer"
+            >Explore All Products</a
+          >
+          <span class="text-gray-500 text-xs">250+ Products</span>
+        </div>
+      </div>
+
+      <div
+        class="category-card bg-white border-r-2 border-r-transparent shadow-sm p-6 rounded-xl transition-all duration-300 h-full flex flex-col hover:border-r-[#17A5C0] hover:shadow-lg hover:-translate-y-1"
+      >
+        <div
+          class="w-14 h-14 rounded-full bg-[#FDEEF3] flex items-center justify-center mb-8 transition-transform duration-300"
+        >
+          <img
+            src="assets/images/Frame1.png"
+            class="h-7"
+            alt="Mobile Phones"
+            title="Mobile Phones"
+          />
+        </div>
+        <h3 class="font-semibold text-lg mt-1 mb-3">Mobile Phones</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-3 flex-1">
+          These are popular categories that users were most interested in recently. The products are
+          optimized to give you best value for money
+        </p>
+        <div class="flex items-center justify-between">
+          <a
+            (click)="goToProductList('mobile-phones')"
+            class="text-[#17A5C0] text-sm font-medium hover:underline hover:text-[#128da0] transition-colors duration-300 cursor-pointer"
+            >Explore All Products</a
+          >
+          <span class="text-gray-500 text-xs">250+ Products</span>
+        </div>
+      </div>
+
+      <div
+        class="category-card bg-white border-r-2 border-r-transparent shadow-sm p-6 rounded-xl transition-all duration-300 h-full flex flex-col hover:border-r-[#17A5C0] hover:shadow-lg hover:-translate-y-1"
+      >
+        <div
+          class="w-14 h-14 rounded-full bg-[#FFF4EB] flex items-center justify-center mb-8 transition-transform duration-300"
+        >
+          <img src="assets/images/Frame2.png" class="h-7" alt="Desktops" title="Desktops" />
+        </div>
+        <h3 class="font-semibold text-lg mt-1 mb-3">Desktops</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
+          These are popular categories that users were most interested in recently. The products are
+          optimized to give you best value for money
+        </p>
+        <div class="flex items-center justify-between">
+          <a
+            (click)="goToProductList('desktops')"
+            class="text-[#17A5C0] text-sm font-medium hover:underline hover:text-[#128da0] transition-colors duration-300 cursor-pointer"
+            >Explore All Products</a
+          >
+          <span class="text-gray-500 text-xs">250+ Products</span>
+        </div>
+      </div>
+
+      <div
+        class="category-card bg-white border-r-2 border-r-transparent shadow-sm p-6 rounded-xl transition-all duration-300 h-full flex flex-col hover:border-r-[#17A5C0] hover:shadow-lg hover:-translate-y-1"
+      >
+        <div
+          class="w-14 h-14 rounded-full bg-[#F1EEFF] flex items-center justify-center mb-8 transition-transform duration-300"
+        >
+          <img src="assets/images/Frame3.png" class="h-7" alt="Monitors" title="Monitors" />
+        </div>
+        <h3 class="font-semibold text-lg mt-1 mb-3">Monitors</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4 flex-1">
+          These are popular categories that users were most interested in recently. The products are
+          optimized to give you best value for money
+        </p>
+        <div class="flex items-center justify-between">
+          <a
+            (click)="goToProductList('monitors')"
+            class="text-[#17A5C0] text-sm font-medium hover:underline hover:text-[#128da0] transition-colors duration-300 cursor-pointer"
+            >Explore All Products</a
+          >
+          <span class="text-gray-500 text-xs">250+ Products</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Best Sellers -->
+  <app-best-sellers></app-best-sellers>
+
+  <app-help-section></app-help-section>
+</div>

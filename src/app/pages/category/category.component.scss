@@ -1,0 +1,45 @@
+// Category component styles
+
+.category-card {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+
+    .category-icon {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.category-icon {
+  transition: transform 0.3s ease;
+}
+
+.category-grid-section {
+  width: 100%;
+  max-width: 1440px;
+  opacity: 1;
+  position: relative;
+  margin: 80px auto 0;
+  padding: 20px 0;
+}
+
+// Responsive adjustments
+@media (max-width: 1440px) {
+  .category-grid-section {
+    width: calc(100% - 20px);
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .category-grid-section {
+    height: auto;
+    margin-top: 40px;
+  }
+}

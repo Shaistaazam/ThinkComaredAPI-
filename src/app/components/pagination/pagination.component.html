@@ -1,0 +1,52 @@
+<!-- Items Per Page Selector -->
+<div class="flex items-center mb-6">
+  <label for="itemsPerPage" class="mr-3 text-sm text-gray-700">Show:</label>
+  <select 
+    id="itemsPerPage"
+    [value]="itemsPerPage"
+    (change)="onItemsPerPageChange($event)"
+    class="border border-gray-300 rounded-lg px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+    <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+  </select>
+  <span class="ml-2 text-sm text-gray-700">items per page</span>
+</div>
+
+<!-- Pagination Controls -->
+<nav class="flex items-center space-x-1 mb-6">
+  <button 
+    (click)="onPreviousPage()" 
+    [disabled]="!canGoPrevious()" 
+    [class.opacity-50]="!canGoPrevious()" 
+    [class.cursor-not-allowed]="!canGoPrevious()" 
+    class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:hover:bg-white transition-colors">
+    Previous
+  </button>
+  
+  <!-- Page Numbers -->
+  <ng-container *ngFor="let page of getPageNumbers(); trackBy: trackByFn">
+    <button 
+      *ngIf="page <= totalPages"
+      (click)="goToPage(page)"
+      [class]="page === currentPage ? 
+        'px-4 py-2 text-sm font-medium text-white bg-orange-500 border border-orange-500 rounded-lg' : 
+        'px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50'">
+      {{ page }}
+    </button>
+  </ng-container>
+  
+  <button 
+    (click)="onNextPage()" 
+    [disabled]="!canGoNext()" 
+    [class.opacity-50]="!canGoNext()" 
+    [class.cursor-not-allowed]="!canGoNext()" 
+    class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:hover:bg-white transition-colors">
+    Next
+  </button>
+</nav>
+
+<!-- Pagination Info -->
+<div class="text-center text-sm text-gray-600">
+  Showing {{ ((currentPage - 1) * itemsPerPage) + 1 }} to 
+  {{ Math.min(currentPage * itemsPerPage, totalItems) }} of 
+  {{ totalItems }} results
+</div>
