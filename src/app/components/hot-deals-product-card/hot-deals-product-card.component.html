@@ -73,8 +73,11 @@
       
       <!-- Line 5: Compare Price Button -->
       <button 
-        class="w-full bg-[#4F46E5] hover:bg-indigo-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-300 h-10">
-        Compare Price
+        (click)="onComparePriceClick()"
+        [class]="isProductInComparison() ? 
+          'w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-300 h-10' : 
+          'w-full bg-[#4F46E5] hover:bg-indigo-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-300 h-10'">
+        {{ isProductInComparison() ? 'View Comparison' : 'Compare Price' }}
       </button>
     </div>
   </div>

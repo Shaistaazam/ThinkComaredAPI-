@@ -4,12 +4,12 @@ import { CategoryHeroComponent } from '../../components/category-hero/category-h
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
 import { HotDealsProductCardComponent } from '../../components/hot-deals-product-card/hot-deals-product-card.component';
-import { FilterSidebarComponent } from '../../components/filter-sidebar/filter-sidebar.component';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FloatingCompareButtonComponent } from '../../components/floating-compare-button/floating-compare-button.component';
 import { ComparisonFilterSidebarComponent } from '../../components/comparison-filter-sidebar/comparison-filter-sidebar.component';
+import { ComparisonSidebarComponent } from '../../components/comparison-sidebar/comparison-sidebar.component';
 
 @Component({
   selector: 'app-comparison',
@@ -17,8 +17,8 @@ import { ComparisonFilterSidebarComponent } from '../../components/comparison-fi
   imports: [
     CategoryHeroComponent,
     HotDealsProductCardComponent,
-    FilterSidebarComponent,
     ComparisonFilterSidebarComponent,
+    ComparisonSidebarComponent,
     PaginationComponent,
     FloatingCompareButtonComponent,
     NgFor,
@@ -38,6 +38,8 @@ export class ComparisonComponent implements OnInit {
   selectedFilters: { [key: string]: string[] } = {}; // Selected filters
   selectedSortOption: string = 'popular'; // Default sort option
   Math = Math; // Make Math available in template
+  showComparisonSidebar = false; // Track if sidebar should be visible
+  sidebarPinned = false; // Track if sidebar should stay visible
   
   constructor(
     private productService: ProductService,
@@ -148,5 +150,24 @@ export class ComparisonComponent implements OnInit {
     this.selectedItemsPerPage = itemsPerPage;
     this.currentPage = 1; // Reset to first page when changing items per page
     this.loadHotDealProducts(1);
+  }
+
+  onProductHover(isHovering: boolean): void {
+    // Only hide sidebar if it's not pinned and user is not hovering
+    if (!this.sidebarPinned) {
+      this.showComparisonSidebar = isHovering;
+    }
+  }
+
+  onProductAdded(): void {
+    // Pin the sidebar when a product is added
+    this.sidebarPinned = true;
+    this.showComparisonSidebar = true;
+  }
+
+  onSidebarClose(): void {
+    // Allow manual closing of sidebar
+    this.sidebarPinned = false;
+    this.showComparisonSidebar = false;
   }
 }

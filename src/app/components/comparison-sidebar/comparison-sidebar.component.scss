@@ -1,0 +1,48 @@
+// Comparison Sidebar Styles
+.comparison-sidebar {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+// Smooth animations for slot changes
+.slot-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.slot-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.slot-leave {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slot-leave-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+// Hover effects
+.product-slot:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+// Empty slot pulse animation
+.empty-slot {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}

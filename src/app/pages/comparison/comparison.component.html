@@ -23,13 +23,13 @@
       </aside>
 
       <!-- Main Content Area -->
-      <main class="flex-2">
+      <main class="flex-1">
         <!-- Results Header -->
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
           <div class="flex items-center gap-4">
             <h1 class="text-2xl font-bold text-gray-900">SEARCH & COMPARE</h1>
             <span class="text-sm text-gray-500" *ngIf="pagination?.totalItems">
-              OVER <span class="text-orange-500 font-semibold">{{ pagination?.totalItems }}</span> OF PRODUCTS
+              OVER <span class="text-[#4F46E5] font-semibold">{{ pagination?.totalItems }}</span> OF PRODUCTS
             </span>
           </div>
           
@@ -38,7 +38,7 @@
             <select 
               [(ngModel)]="selectedCategoryId" 
               (ngModelChange)="onCategoryChange($event)"
-              class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+              class="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5]">
               <option *ngFor="let category of categories" [value]="category.id">
                 {{ category.name }}
               </option>
@@ -52,15 +52,19 @@
 
         <!-- Loading State -->
         <div *ngIf="loading" class="flex justify-center items-center py-20">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4F46E5]"></div>
         </div>
 
         <!-- Products Grid -->
-        <div *ngIf="!loading && products.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <app-hot-deals-product-card 
-            *ngFor="let product of products" 
-            [product]="product">
-          </app-hot-deals-product-card>
+        <div *ngIf="!loading && products.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div *ngFor="let product of products" 
+               (mouseenter)="onProductHover(true)" 
+               (mouseleave)="onProductHover(false)">
+            <app-hot-deals-product-card 
+              [product]="product"
+              (productAdded)="onProductAdded()">
+            </app-hot-deals-product-card>
+          </div>
         </div>
 
         <!-- Empty State -->
@@ -87,6 +91,16 @@
           </app-pagination>
         </div>
       </main>
+
+      <!-- Right Sidebar - Comparison (Show on hover or when pinned) -->
+      <aside class="fixed right-4 top-1/2 transform -translate-y-1/2 w-80 z-50 hidden xl:block" *ngIf="showComparisonSidebar || sidebarPinned">
+        <app-comparison-sidebar (closeSidebar)="onSidebarClose()"></app-comparison-sidebar>
+      </aside>
+    </div>
+    
+    <!-- Mobile Comparison Sidebar (Show on hover or when pinned) -->
+    <div class="xl:hidden fixed bottom-4 left-4 right-4 z-50" *ngIf="showComparisonSidebar || sidebarPinned">
+      <app-comparison-sidebar (closeSidebar)="onSidebarClose()"></app-comparison-sidebar>
     </div>
   </div>
 </div>
