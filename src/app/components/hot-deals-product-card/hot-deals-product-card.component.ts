@@ -1,8 +1,9 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { NgIf, NgFor } from '@angular/common';
 import { ComparisonService } from '../../services/comparison.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hot-deals-product-card',
@@ -11,12 +12,28 @@ import { ComparisonService } from '../../services/comparison.service';
   templateUrl: './hot-deals-product-card.component.html',
   styleUrls: ['./hot-deals-product-card.component.scss']
 })
-export class HotDealsProductCardComponent {
+export class HotDealsProductCardComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
   @Output() productAdded = new EventEmitter<void>();
   Math = Math; // Make Math available in template
   
+  showSelectOnHover = false; // Track if select overlay should show on hover
+  private subscription: Subscription = new Subscription();
+  
   constructor(private comparisonService: ComparisonService, private router: Router) {}
+  
+  ngOnInit(): void {
+    // Subscribe to empty slot hover state
+    this.subscription.add(
+      this.comparisonService.showEmptySlotHover$.subscribe((showHover: boolean) => {
+        this.showSelectOnHover = showHover;
+      })
+    );
+  }
+  
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
   
   onCompareClick(): void {
     const result = this.comparisonService.addToComparison(this.product);
@@ -44,14 +61,14 @@ export class HotDealsProductCardComponent {
       // Navigate to comparison view page if we have at least 2 products
       const comparisonCount = this.comparisonService.getComparisonCount();
       if (comparisonCount >= 2) {
-        this.router.navigate(['/compare/view']);
+        this.router.navigate(['/comparison']);
       }
     } else {
       // If product is already in comparison, just navigate to comparison view
       if (this.comparisonService.isInComparison(this.product.id)) {
         const comparisonCount = this.comparisonService.getComparisonCount();
         if (comparisonCount >= 2) {
-          this.router.navigate(['/compare/view']);
+          this.router.navigate(['/comparison']);
         } else {
           alert('Add at least one more product to compare.');
         }
@@ -69,6 +86,10 @@ export class HotDealsProductCardComponent {
     return this.comparisonService.isInComparison(this.product.id);
   }
   
+  onViewDetails(): void {
+    this.router.navigate(['/product', this.product.id]);
+  }
+
   canAddMore(): boolean {
     return this.comparisonService.canAddMore();
   }

@@ -6,11 +6,14 @@ import { FilterSidebarComponent } from '../../../components/filter-sidebar/filte
 import { ProductService } from '../../../services/product.service';
 import { Product } from '../../../models/product.model';
 import { HotDealsProductCardComponent } from '../../../components/hot-deals-product-card/hot-deals-product-card.component';
+import { CategoryHeroComponent } from '../../../components/category-hero/category-hero.component';
+import { BestSellersComponent } from '../../../components/best-sellers/best-sellers.component';
+import { HelpSectionComponent } from '../../../components/help-section/help-section.component';
 
 @Component({
   selector: 'app-category-next',
   standalone: true,
-  imports: [NgFor, NgIf, RouterModule, FilterSidebarComponent, HotDealsProductCardComponent, FormsModule],
+  imports: [NgFor, NgIf, RouterModule, FilterSidebarComponent, HotDealsProductCardComponent, FormsModule, CategoryHeroComponent, BestSellersComponent, HelpSectionComponent],
   templateUrl: './category-next.component.html',
   styleUrl: './category-next.component.scss',
 })

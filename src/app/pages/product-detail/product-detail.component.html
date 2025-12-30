@@ -1,0 +1,223 @@
+<app-category-hero></app-category-hero>
+<!-- Loading State -->
+<div *ngIf="loading" class="flex justify-center items-center min-h-screen">
+  <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4F46E5]"></div>
+</div>
+
+<!-- Product Not Found -->
+<div *ngIf="!loading && !product" class="flex justify-center items-center min-h-screen">
+  <div class="text-center">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h2>
+    <button (click)="goBack()" class="bg-[#4F46E5] text-white px-6 py-2 rounded-lg hover:bg-indigo-700">
+      Go Back
+    </button>
+  </div>
+</div>
+
+<!-- Product Detail -->
+<div *ngIf="!loading && product" class="bg-white min-h-screen">
+  <!-- Category Hero Section -->
+  <!-- <app-category-hero></app-category-hero> -->
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center text-gray-400 font-medium text-sm">
+      <a routerLink="/" class="hover:text-[#FEB854] transition-colors duration-300">Home</a>
+      <span class="text-black mx-2">›</span>
+      <a routerLink="/hot-deals" class="hover:text-[#FEB854] transition-colors duration-300">Hot Deals</a>
+      <span class="text-black mx-2">›</span>
+      <span class="text-black">{{ product.name }}</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container mx-auto px-4 py-8">
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+      <h1 class="text-2xl sm:text-3xl font-bold text-[#1E293B] mb-2">SEARCH & COMPARE</h1>
+      <p class="text-sm text-gray-500">
+        OVER <span class="text-[#7C3AED] font-semibold">936,000</span> OF PRODUCTS
+      </p>
+    </div>
+
+    <!-- Product Detail Section -->
+    <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-sm border p-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        
+        <!-- Left Side - Product Images -->
+        <div class="space-y-4">
+          <!-- Main Product Image -->
+          <div class="bg-gray-50 rounded-lg p-8 flex items-center justify-center h-96">
+            <img 
+              [src]="product.imageUrl" 
+              [alt]="product.name"
+              class="max-w-full max-h-full object-contain"
+            />
+          </div>
+          
+          <!-- Thumbnail Images -->
+          <div class="flex gap-2 justify-center">
+            <div class="w-16 h-16 bg-gray-100 rounded border-2 border-[#4F46E5] p-2">
+              <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-full object-contain">
+            </div>
+            <div class="w-16 h-16 bg-gray-100 rounded border p-2">
+              <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-full object-contain">
+            </div>
+            <div class="w-16 h-16 bg-gray-100 rounded border p-2">
+              <img [src]="product.imageUrl" [alt]="product.name" class="w-full h-full object-contain">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side - Product Info -->
+        <div class="space-y-6">
+          <!-- Product Title -->
+          <div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-2">{{ product.name }}</h2>
+            <p class="text-gray-600">{{ product.description }}</p>
+          </div>
+
+          <!-- Rating -->
+          <div class="flex items-center gap-2">
+            <div class="flex items-center">
+              <svg *ngFor="let star of [].constructor(5); let i = index" 
+                   [attr.fill]="i < Math.floor(product.rating) ? '#FBBF24' : '#E5E7EB'" 
+                   viewBox="0 0 20 20" 
+                   class="w-5 h-5">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            </div>
+            <span class="text-lg font-medium">{{ product.rating }}</span>
+            <span class="text-gray-500">({{ product.reviewsCount || 0 }} reviews)</span>
+          </div>
+
+          <!-- Price -->
+          <div class="bg-gray-50 rounded-lg p-4">
+            <div class="text-3xl font-bold text-[#DC2626] mb-2">${{ product.price }}</div>
+            <div class="text-green-600 font-medium">✓ IN STOCK</div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="space-y-3">
+            <!-- Add to Comparison Button -->
+            <button
+              *ngIf="!isInComparison() && canAddMore()"
+              (click)="addToComparison()"
+              class="w-full bg-[#4F46E5] hover:bg-indigo-700 text-white py-3 px-6 rounded-lg text-lg font-medium transition-colors duration-300">
+              Add to Comparison
+            </button>
+
+            <!-- Already in Comparison -->
+            <div *ngIf="isInComparison()" class="space-y-2">
+              <div class="w-full bg-green-500 text-white py-3 px-6 rounded-lg text-lg font-medium text-center">
+                ✓ Added to Comparison
+              </div>
+              <button
+                (click)="removeFromComparison()"
+                class="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-6 rounded-lg font-medium transition-colors duration-300">
+                Remove from Comparison
+              </button>
+            </div>
+
+            <!-- Max Limit Reached -->
+            <button
+              *ngIf="!canAddMore() && !isInComparison()"
+              disabled
+              class="w-full bg-gray-400 text-white py-3 px-6 rounded-lg text-lg font-medium cursor-not-allowed">
+              Maximum 4 Products in Comparison
+            </button>
+
+            <!-- Compare Now Button -->
+            <button
+              (click)="navigateToComparison()"
+              class="w-full bg-[#FEB854] hover:bg-orange-500 text-white py-3 px-6 rounded-lg text-lg font-medium transition-colors duration-300">
+              Compare Now
+            </button>
+          </div>
+
+          <!-- Product Features -->
+          <div class="border-t pt-6">
+            <h3 class="text-lg font-semibold mb-3">Key Features</h3>
+            <ul class="space-y-2 text-gray-600">
+              <li>• Category: {{ product.category }}</li>
+              <li *ngIf="product.isFeatured">• Featured Product</li>
+              <li *ngIf="product.isNew">• New Arrival</li>
+              <li>• High Quality Build</li>
+              <li>• Warranty Included</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison Table Section (Similar to image) -->
+    <div class="max-w-6xl mx-auto mt-8 bg-white rounded-lg shadow-sm border">
+      <div class="p-6">
+        <h3 class="text-xl font-bold mb-4">Price Comparison</h3>
+        
+        <!-- Table Header -->
+        <div class="grid grid-cols-4 gap-4 py-3 border-b font-semibold text-gray-700">
+          <div>Retailer</div>
+          <div>Price</div>
+          <div>Shipping</div>
+          <div>Total</div>
+        </div>
+
+        <!-- Sample Retailers -->
+        <div class="grid grid-cols-4 gap-4 py-3 border-b hover:bg-gray-50">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-blue-500 rounded"></div>
+            <span>eBay</span>
+          </div>
+          <div class="font-medium">${{ product.price }}</div>
+          <div class="text-green-600">Free</div>
+          <div class="font-bold">${{ product.price }}</div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4 py-3 border-b hover:bg-gray-50">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-orange-500 rounded"></div>
+            <span>Amazon</span>
+          </div>
+          <div class="font-medium">${{ (product.price * 1.05).toFixed(2) }}</div>
+          <div class="text-green-600">Free</div>
+          <div class="font-bold">${{ (product.price * 1.05).toFixed(2) }}</div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4 py-3 border-b hover:bg-gray-50">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-red-500 rounded"></div>
+            <span>Target</span>
+          </div>
+          <div class="font-medium">${{ (product.price * 1.08).toFixed(2) }}</div>
+          <div class="text-red-600">$5.99</div>
+          <div class="font-bold">${{ (product.price * 1.08 + 5.99).toFixed(2) }}</div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-4 py-3 hover:bg-gray-50">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 bg-blue-600 rounded"></div>
+            <span>Costco</span>
+          </div>
+          <div class="font-medium">${{ (product.price * 0.95).toFixed(2) }}</div>
+          <div class="text-green-600">Free</div>
+          <div class="font-bold">${{ (product.price * 0.95).toFixed(2) }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-8">
+      <button 
+        (click)="goBack()"
+        class="bg-gray-500 hover:bg-gray-600 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-300">
+        ← Back to Products
+      </button>
+    </div>
+  </div>
+
+  <!-- Best Sellers Section -->
+  <app-best-sellers></app-best-sellers>
+
+  <!-- Help Section -->
+  <app-help-section></app-help-section>
+</div>

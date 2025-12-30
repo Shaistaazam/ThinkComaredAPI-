@@ -1,6 +1,43 @@
 <div class="bg-white rounded-lg shadow-sm border overflow-hidden hover:shadow-md transition-shadow duration-300 relative group h-full flex flex-col min-h-[420px]">
-  <!-- Hover Add Product Button -->
-  <div class="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+  <!-- Normal Hover - View Details (Always visible on hover) -->
+  <div class="absolute inset-0 bg-black bg-opacity-30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-5 flex items-center justify-center">
+    <button
+      (click)="onViewDetails()"
+      class="bg-white hover:bg-gray-100 text-gray-800 px-6 py-3 rounded-lg text-lg font-medium transition-colors duration-300 shadow-lg">
+      View Details
+    </button>
+  </div>
+
+  <!-- Select Hover Overlay - Only show when empty slots are visible (Higher z-index) -->
+  <div *ngIf="showSelectOnHover" class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
+    <button
+      *ngIf="!isProductInComparison() && canAddMore()"
+      (click)="onCompareClick()"
+      class="bg-[#4F46E5] hover:bg-indigo-700 text-white px-6 py-3 rounded-lg text-lg font-medium transition-colors duration-300">
+      Select
+    </button>
+    
+    <div *ngIf="isProductInComparison()" class="text-center">
+      <div class="bg-green-500 text-white px-6 py-3 rounded-lg mb-2">
+        <svg class="inline-block w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        Selected
+      </div>
+      <button
+        (click)="removeFromComparison()"
+        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-300">
+        Remove
+      </button>
+    </div>
+    
+    <div *ngIf="!canAddMore() && !isProductInComparison()" class="bg-gray-500 text-white px-6 py-3 rounded-lg">
+      Max 4 products
+    </div>
+  </div>
+
+  <!-- Hover Add Product Button (Top Right) - Only show when empty slots are visible -->
+  <div *ngIf="showSelectOnHover" class="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
     <button
       *ngIf="!isProductInComparison() && canAddMore()"
       (click)="onCompareClick()"
@@ -9,10 +46,6 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
       </svg>
-      <!-- Hover Text -->
-      <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-        Add Product
-      </span>
     </button>
     
     <button
@@ -23,10 +56,6 @@
       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
-      <!-- Hover Text -->
-      <span class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
-        Remove Product
-      </span>
     </button>
   </div>
 
@@ -77,7 +106,7 @@
         [class]="isProductInComparison() ? 
           'w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-300 h-10' : 
           'w-full bg-[#4F46E5] hover:bg-indigo-700 text-white py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-300 h-10'">
-        {{ isProductInComparison() ? 'View Comparison' : 'Compare Price' }}
+        {{ isProductInComparison() ? 'Compare Products' : 'Compare Price' }}
       </button>
     </div>
   </div>

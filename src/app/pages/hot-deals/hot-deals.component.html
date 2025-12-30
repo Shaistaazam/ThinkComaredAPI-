@@ -59,12 +59,27 @@
           <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4F46E5]"></div>
         </div>
 
-        <!-- Products Grid -->
-        <div *ngIf="!loading && products.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <app-hot-deals-product-card 
-            *ngFor="let product of products" 
-            [product]="product">
-          </app-hot-deals-product-card>
+        <!-- Products Grid - First 2 rows -->
+        <div *ngIf="!loading && products.length > 0">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-6">
+            <app-hot-deals-product-card 
+              *ngFor="let product of firstRowProducts" 
+              [product]="product"
+              (productAdded)="onProductAdded()">
+            </app-hot-deals-product-card>
+          </div>
+
+          <!-- Comparison Bar - Shows between products when floating button is clicked -->
+          <app-comparison-bar></app-comparison-bar>
+
+          <!-- Products Grid - Remaining products -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <app-hot-deals-product-card 
+              *ngFor="let product of remainingProducts" 
+              [product]="product"
+              (productAdded)="onProductAdded()">
+            </app-hot-deals-product-card>
+          </div>
         </div>
 
         <!-- Empty State -->
@@ -93,4 +108,10 @@
       </main>
     </div>
   </div>
+
+  <!-- Best Sellers Section -->
+  <app-best-sellers></app-best-sellers>
+
+  <!-- Help Section -->
+  <app-help-section></app-help-section>
 </div>

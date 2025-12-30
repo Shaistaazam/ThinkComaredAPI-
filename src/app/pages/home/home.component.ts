@@ -5,6 +5,7 @@ import { HelpSectionComponent } from '../../components/help-section/help-section
 import { BestSellersComponent } from '../../components/best-sellers/best-sellers.component';
 import { HotDealsComponent } from '../../components/hot-deals/hot-deals.component';
 import { ProductService } from '../../services/product.service';
+import { FloatingCompareButtonComponent } from '../../components/floating-compare-button/floating-compare-button.component';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { ProductService } from '../../services/product.service';
     HelpSectionComponent,
     BestSellersComponent,
     HotDealsComponent,
+    FloatingCompareButtonComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

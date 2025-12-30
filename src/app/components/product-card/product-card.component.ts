@@ -1,7 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
+import { Router } from '@angular/router';
 import { ComparisonService } from '../../services/comparison.service';
 import { Product } from '../../models/product.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-card',
@@ -10,11 +12,27 @@ import { Product } from '../../models/product.model';
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.scss',
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit, OnDestroy {
   @Input() product!: Product;
   @Input() showCompareButton: boolean = true;
 
-  constructor(private comparisonService: ComparisonService) {}
+  showSelectOnHover = false; // Track if select overlay should show on hover
+  private subscription: Subscription = new Subscription();
+
+  constructor(private comparisonService: ComparisonService, private router: Router) {}
+
+  ngOnInit(): void {
+    // Subscribe to empty slot hover state
+    this.subscription.add(
+      this.comparisonService.showEmptySlotHover$.subscribe((showHover: boolean) => {
+        this.showSelectOnHover = showHover;
+      })
+    );
+  }
+  
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   addToCompare(): void {
     const success = this.comparisonService.addToComparison(this.product);
@@ -33,6 +51,10 @@ export class ProductCardComponent {
 
   isInComparison(): boolean {
     return this.comparisonService.isInComparison(this.product.id);
+  }
+
+  onViewDetails(): void {
+    this.router.navigate(['/product', this.product.id]);
   }
 
   canAddMore(): boolean {

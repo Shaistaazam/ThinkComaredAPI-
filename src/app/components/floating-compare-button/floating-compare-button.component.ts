@@ -10,15 +10,15 @@ import { filter } from 'rxjs/operators';
   imports: [CommonModule],
   template: `
     <!-- Floating Compare Button -->
-    <div *ngIf="shouldShowButton" class="fixed bottom-6 left-6 z-[9999]">
+    <div *ngIf="shouldShowButton" class="fixed bottom-16 left-8 z-[9999]">
       <button 
-        (click)="goToComparePage()"
-        class="bg-[#7C3AED] hover:bg-purple-700 text-white w-14 h-14 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 flex items-center justify-center relative">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        (click)="toggleComparisonBar()"
+        class="bg-[#FEB854] hover:bg-orange-500 text-white w-16 h-16 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 flex items-center justify-center relative">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
         <!-- Count Badge -->
-        <span *ngIf="comparisonCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-6 w-6 flex items-center justify-center font-bold">
+        <span *ngIf="comparisonCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-7 w-7 flex items-center justify-center font-bold shadow-lg">
           {{ comparisonCount }}
         </span>
       </button>
@@ -33,7 +33,8 @@ import { filter } from 'rxjs/operators';
 export class FloatingCompareButtonComponent implements OnInit {
   comparisonCount = 0;
   shouldShowButton = false;
-  allowedRoutes = ['/hot-deals', '/compare', '/compare/view', '/comparison'];
+  allowedRoutes = ['/hot-deals', '/comparison', '/', '/category', '/category-next', '/about', '/contact', '/account', '/product'];
+  currentRoute = '';
 
   constructor(
     private router: Router,
@@ -57,11 +58,36 @@ export class FloatingCompareButtonComponent implements OnInit {
   }
 
   private checkRoute(url: string): void {
+    this.currentRoute = url;
     this.shouldShowButton = this.allowedRoutes.some(route => url.startsWith(route));
     console.log('Current URL:', url, 'Should show button:', this.shouldShowButton);
   }
 
-  goToComparePage(): void {
-    this.router.navigate(['/compare']);
+  toggleComparisonBar(): void {
+    // Always show comparison bar with empty slots when button is clicked
+    this.comparisonService.showComparisonBar();
+    
+    // If on hot-deals page, just toggle the bar
+    if (this.currentRoute.startsWith('/hot-deals')) {
+      // Bar is already shown above
+      return;
+    }
+    
+    // On other pages, show the bar and enable empty slot hover
+    // If user has products and wants to compare, navigate to comparison page
+    if (this.comparisonCount >= 2) {
+      // Show option to either view comparison or add more products
+      const userChoice = confirm('You have ' + this.comparisonCount + ' products selected. Do you want to compare them now? (Cancel to add more products)');
+      if (userChoice) {
+        this.router.navigate(['/comparison']);
+      }
+      // If cancelled, comparison bar will remain visible for adding more products
+    } else if (this.comparisonCount === 1) {
+      // Show bar to add more products
+      // Bar is already shown above
+    } else {
+      // No products selected, show bar to start selecting
+      // Bar is already shown above
+    }
   }
 }

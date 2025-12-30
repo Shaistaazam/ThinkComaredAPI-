@@ -1,3 +1,17 @@
+<!-- Category Hero Section -->
+<app-category-hero></app-category-hero>
+
+<!-- Breadcrumb -->
+<div class="container mx-auto px-4 sm:mt-14">
+  <div class="flex items-center text-gray-400 font-poppins font-semibold text-xl">
+    <a href="/" class="hover:text-[#FEB854] transition-colors duration-300 pr-2">Home</a>
+    <span class="text-black mx-2">›</span>
+    <a href="/category" class="hover:text-[#FEB854] transition-colors duration-300 pr-2">Category</a>
+    <span class="text-black mx-2">›</span>
+    <span class="text-black pl-2">{{ getCategoryDisplayName() }}</span>
+  </div>
+</div>
+
 <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row">
   <!-- Filters Sidebar -->
   <div class="w-full md:w-1/4 pr-0 md:pr-8 mb-8 md:mb-0">
@@ -38,3 +52,9 @@
     </div>
   </div>
 </div>
+
+<!-- Best Sellers Section -->
+<app-best-sellers></app-best-sellers>
+
+<!-- Help Section -->
+<app-help-section></app-help-section>

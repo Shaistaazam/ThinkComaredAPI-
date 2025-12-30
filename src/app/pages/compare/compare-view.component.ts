@@ -3,18 +3,21 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ComparisonService } from '../../services/comparison.service';
 import { Product } from '../../models/product.model';
+import { CategoryHeroComponent } from '../../components/category-hero/category-hero.component';
+import { BestSellersComponent } from '../../components/best-sellers/best-sellers.component';
+import { HelpSectionComponent } from '../../components/help-section/help-section.component';
+import { FloatingCompareButtonComponent } from '../../components/floating-compare-button/floating-compare-button.component';
 
 @Component({
   selector: 'app-compare-view',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CategoryHeroComponent, BestSellersComponent, HelpSectionComponent, FloatingCompareButtonComponent],
   templateUrl: './compare-view.component.html',
   styleUrls: ['./compare-view.component.scss']
 })
 export class CompareViewComponent implements OnInit {
   comparisonItems: Product[] = [];
   comparisonFeatures = [
-    { key: 'name', label: 'Product Name', type: 'text' },
     { key: 'price', label: 'Price', type: 'currency' },
     { key: 'category', label: 'Category', type: 'text' },
     { key: 'rating', label: 'Rating', type: 'rating' },
@@ -33,10 +36,10 @@ export class CompareViewComponent implements OnInit {
     this.comparisonService.comparisonItems$.subscribe(items => {
       this.comparisonItems = items;
       
-      // Redirect if no items to compare
-      if (items.length < 2) {
-        this.router.navigate(['/compare']);
-      }
+      // Don't redirect if no items - just show empty state
+      // if (items.length < 2) {
+      //   this.router.navigate(['/compare']);
+      // }
     });
   }
 
@@ -64,12 +67,15 @@ export class CompareViewComponent implements OnInit {
   }
 
   addMoreProducts(): void {
-    this.router.navigate(['/compare']);
+    // Navigate to hot deals page to add more products
+    this.router.navigate(['/hot-deals']);
   }
 
   clearAll(): void {
+    // Clear all products and stay on comparison page
     this.comparisonService.clearComparison();
-    this.router.navigate(['/compare']);
+    // Optionally navigate to hot deals after clearing
+    // this.router.navigate(['/hot-deals']);
   }
 
   getBestValue(feature: any): number | null {

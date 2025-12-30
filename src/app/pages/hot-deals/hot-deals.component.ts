@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CategoryHeroComponent } from '../../components/category-hero/category-hero.component';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
 import { HotDealsProductCardComponent } from '../../components/hot-deals-product-card/hot-deals-product-card.component';
 import { FilterSidebarComponent } from '../../components/filter-sidebar/filter-sidebar.component';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
+import { ComparisonBarComponent } from '../../components/comparison-bar/comparison-bar.component';
+import { BestSellersComponent } from '../../components/best-sellers/best-sellers.component';
+import { HelpSectionComponent } from '../../components/help-section/help-section.component';
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -17,6 +21,9 @@ import { FormsModule } from '@angular/forms';
     HotDealsProductCardComponent,
     FilterSidebarComponent,
     PaginationComponent,
+    ComparisonBarComponent,
+    BestSellersComponent,
+    HelpSectionComponent,
     NgFor,
     NgIf,
     FormsModule
@@ -24,7 +31,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './hot-deals.component.html',
   styleUrls: ['./hot-deals.component.scss'],
 })
-export class HotDealsComponent implements OnInit {
+export class HotDealsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
   loading = true;
   pagination: {pageNo: number, perPage: number, totalItems: number, selectedItems: number} | null = null;
@@ -35,6 +42,18 @@ export class HotDealsComponent implements OnInit {
   selectedFilters: { [key: string]: string[] } = {}; // Selected filters
   selectedSortOption: string = 'popular'; // Default sort option
   Math = Math; // Make Math available in template
+  private subscription: Subscription = new Subscription();
+
+  // Split products for comparison bar placement
+  get firstRowProducts(): Product[] {
+    const itemsPerRow = 4; // Assuming 4 items per row on desktop
+    return this.products.slice(0, itemsPerRow * 2); // First 2 rows
+  }
+
+  get remainingProducts(): Product[] {
+    const itemsPerRow = 4;
+    return this.products.slice(itemsPerRow * 2); // Remaining products
+  }
   
   categories = [
     { id: undefined, name: 'All Categories' },
@@ -62,6 +81,10 @@ export class HotDealsComponent implements OnInit {
       }
       this.loadHotDealProducts();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
   
   loadHotDealProducts(pageNo: number = 1): void {
@@ -148,6 +171,11 @@ export class HotDealsComponent implements OnInit {
     this.selectedItemsPerPage = itemsPerPage;
     this.currentPage = 1; // Reset to first page when changing items per page
     this.loadHotDealProducts(1);
+  }
+
+  onProductAdded(): void {
+    // This method is called when a product is added to comparison
+    // The comparison bar will automatically show due to the subscription
   }
 
 }

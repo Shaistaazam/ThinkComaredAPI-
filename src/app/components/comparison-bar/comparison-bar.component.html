@@ -1,0 +1,70 @@
+<!-- Comparison Bar - Inline with products, not fixed -->
+<div *ngIf="shouldShow()" class="bg-white border-2 border-[#FEB854] rounded-lg shadow-md p-4 mb-6 max-w-5xl mx-auto relative">
+  <!-- Toggle Button - Inside the box on left -->
+  <button 
+    (click)="toggleBar()"
+    class="absolute -left-4 top-1/2 -translate-y-1/2 bg-[#FEB854] hover:bg-orange-500 text-white w-12 h-12 rounded-full shadow-lg transform transition-all duration-300 hover:scale-110 flex items-center justify-center z-10">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <!-- Horizontal slots -->
+  <div class="flex gap-4 overflow-x-auto pb-2">
+    <!-- Filled slots with products -->
+    <div *ngFor="let product of comparisonItems" 
+         class="flex-shrink-0 w-48 bg-gray-50 border-2 border-[#4F46E5] rounded-lg p-3 relative">
+      <!-- Remove button -->
+      <button
+        (click)="removeProduct(product.id)"
+        class="absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs transition-colors duration-300 z-10">
+        ×
+      </button>
+      
+      <!-- Product image -->
+      <div class="w-full h-24 bg-white rounded mb-2 flex items-center justify-center overflow-hidden">
+        <img 
+          *ngIf="product.imageUrl" 
+          [src]="product.imageUrl" 
+          [alt]="product.name"
+          class="w-full h-full object-contain p-1"
+        />
+        <div *ngIf="!product.imageUrl" class="text-gray-400 text-xs">No Image</div>
+      </div>
+      
+      <!-- Product info -->
+      <div class="text-center">
+        <h4 class="text-sm font-medium text-gray-900 line-clamp-2 mb-1">{{ product.name }}</h4>
+        <p class="text-sm font-bold text-[#DC2626]">${{ product.price }}</p>
+      </div>
+    </div>
+
+    <!-- Empty slots -->
+    <div *ngFor="let slot of getEmptySlots()" 
+         class="flex-shrink-0 w-56 bg-gray-100 border-2 border-dashed border-gray-300 rounded-lg p-3 flex items-center justify-center min-h-[180px]">
+      <div class="text-center text-gray-500">
+        <svg class="mx-auto h-8 w-8 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        <p class="text-xs">Add Product</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action buttons below slots -->
+  <div class="flex justify-center gap-3 mt-4 pt-4 border-t border-gray-200">
+    <button
+      (click)="compareProducts()"
+      [disabled]="!canCompare()"
+      [class.opacity-50]="!canCompare()"
+      [class.cursor-not-allowed]="!canCompare()"
+      class="bg-[#4F46E5] hover:bg-indigo-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors duration-300">
+      Compare Products ({{ comparisonItems.length }})
+    </button>
+    <button
+      (click)="clearAll()"
+      class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors duration-300">
+      Cancel
+    </button>
+  </div>
+</div>
